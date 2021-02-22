@@ -63,7 +63,7 @@ class Ctor(object):
     def add_api(self, T, is_static):
         methods = self.methods
         self.methods.clear()
-        api = ApiDef(T.__name__, methods)
+        api = ApiDef(T.__name__, T, methods)
         Registry.inst().add_api(api)
         pass
     

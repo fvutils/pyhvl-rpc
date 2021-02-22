@@ -13,15 +13,26 @@ class Registry(object):
     
     def __init__(self):
         self.apis : List[ApiDef] = []
-        self.api_m : Dict[str,ApiDef] = {}
+        self.name_api_m : Dict[str,ApiDef] = {}
+        self.cls_api_m : Dict[type,ApiDef] = {}
         pass
     
     def add_api(self, api : ApiDef):
-        if api.name in self.api_m.keys():
+        if api.name in self.name_api_m.keys():
             raise Exception("Attemping to add duplicate API " + api.name)
         
         self.apis.append(api)
-        self.api_m[api.name] = api
+        self.name_api_m[api.name] = api
+        self.cls_api_m[api.cls] = api
+        
+        print("add_api: " + str(api.cls))
+        
+    def get_api_by_cls(self, cls):
+        print("get_api_by_cls: " + str(cls))
+        if cls in self.cls_api_m.keys():
+            return self.cls_api_m[cls]
+        else:
+            return None
     
     @classmethod
     def inst(cls):

@@ -20,6 +20,17 @@ class TestApiDef(TestCase):
                         b : ctypes.c_uint32) -> ctypes.c_uint32:
                 pass
             
+    def test_vprint(self):
+        
+        @hvlrpc.api
+        class my_api(object):
+            
+            @hvlrpc.imp_func
+            def vprintf(self, 
+                        fmt : str,
+                        ap : hvlrpc.va_list):
+                pass            
+            
     def test_missing_ptype(self):
         try:        
             @hvlrpc.api
@@ -47,6 +58,18 @@ class TestApiDef(TestCase):
         except Exception as e:
             self.assertTrue("Cannot specify a return type for a task" in str(e))
                     
+    def test_param_dir(self):
+        try:        
+            @hvlrpc.api
+            class my_api(object):
+            
+                @hvlrpc.imp_task
+                def my_task(self, 
+                        a : hvlrpc.input[ctypes.c_uint64]) -> ctypes.c_uint32:
+                    pass
+            self.fail("Failed to detect missing param type")
+        except Exception as e:
+            self.assertTrue("Cannot specify a return type for a task" in str(e))
             
         
         
