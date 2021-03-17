@@ -17,18 +17,17 @@ setup(
   url = "https://github.com/fvutils/pyhvl-rpc",
   entry_points={
     'console_scripts': [
-      'mkdv = mkdv.__main__:main'
+      'hvlrpc = hvlrpc.__main__:main'
     ]
   },
   setup_requires=[
-    'colorama',
     'setuptools_scm',
     'wheel',
-    'pyyaml'
+    'numpy'
   ],
   install_requires=[
     'colorama',
-    'pyyaml'
+    'numpy'
   ],
 )
 

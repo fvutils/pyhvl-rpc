@@ -11,21 +11,23 @@ class TestApiDef(TestCase):
     
     def test_static_api(self):
         
-        @hvlrpc.api
+        @hvlrpc.api_imp
         class my_api(object):
             
-            @hvlrpc.imp_func
+            @hvlrpc.func
             def my_func(self, 
                         a : ctypes.c_uint64,
                         b : ctypes.c_uint32) -> ctypes.c_uint32:
                 pass
             
+        
+            
     def test_vprint(self):
         
-        @hvlrpc.api
+        @hvlrpc.api_imp
         class my_api(object):
             
-            @hvlrpc.imp_func
+            @hvlrpc.func
             def vprintf(self, 
                         fmt : str,
                         ap : hvlrpc.va_list):
@@ -33,10 +35,10 @@ class TestApiDef(TestCase):
             
     def test_missing_ptype(self):
         try:        
-            @hvlrpc.api
+            @hvlrpc.api_imp
             class my_api(object):
             
-                @hvlrpc.imp_func
+                @hvlrpc.func
                 def my_func(self, 
                         a : ctypes.c_uint64,
                         b) -> ctypes.c_uint32:
@@ -47,10 +49,10 @@ class TestApiDef(TestCase):
 
     def test_task_return(self):
         try:        
-            @hvlrpc.api
+            @hvlrpc.api_imp
             class my_api(object):
             
-                @hvlrpc.imp_task
+                @hvlrpc.task
                 def my_task(self, 
                         a : ctypes.c_uint64) -> ctypes.c_uint32:
                     pass
@@ -60,10 +62,10 @@ class TestApiDef(TestCase):
                     
     def test_param_dir(self):
         try:        
-            @hvlrpc.api
+            @hvlrpc.api_imp
             class my_api(object):
             
-                @hvlrpc.imp_task
+                @hvlrpc.task
                 def my_task(self, 
                         a : hvlrpc.input[ctypes.c_uint64]) -> ctypes.c_uint32:
                     pass

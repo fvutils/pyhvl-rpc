@@ -12,13 +12,13 @@ class MethodDef(object):
             self,
             parent,
             name,
-            is_import,
+            idx,
             is_task,
             rtype,
             params : List[ParamDef]):
         self.parent = parent
         self.name = name
-        self.is_import = is_import
+        self.idx = idx
         self.is_task = is_task
         self.rtype = rtype
         self.params = params

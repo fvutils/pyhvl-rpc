@@ -4,17 +4,24 @@ Created on Jan 30, 2021
 @author: mballance
 '''
 from hvlrpc.impl.ctor import Ctor
+from hvlrpc.impl.method_wrapper import MethodWrapper
 
-def api(T):
-    """
-    Identifies a static API (non-object)
-    """
-    Ctor.inst().add_api(T, False)
+def api_bundle(T):
+    
+    Ctor.inst().add_bundle(T)
+    
     return T
 
-def obj(T):
+def api_imp(T):
     """
-    Identifies an object API
+    Identifies an imported API -- one that Python will call
+    """
+    Ctor.inst().add_api(T, True)
+    return T
+
+def api_exp(T):
+    """
+    Identifies an exported API -- one that will call Python
     """
     Ctor.inst().add_api(T, False)
     return T
@@ -25,19 +32,11 @@ def struct(T):
     """
     return T
 
-def imp_func(T):
-    Ctor.inst().add_method(T, True, False)
+def func(T):
+    Ctor.inst().add_method(T, False)
     return T
 
-def imp_task(T):
-    Ctor.inst().add_method(T, True, True)
-    return T
-
-def exp_func(T):
-    Ctor.inst().add_method(T, False, False)
-    return T
-
-def exp_task(T):
-    Ctor.inst().add_method(T, False, True)
+def task(T):
+    Ctor.inst().add_method(T, True)
     return T
 

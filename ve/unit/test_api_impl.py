@@ -11,10 +11,10 @@ class TestApiImpl(TestCase):
     
     def test_smoke(self):
         
-        @hvlrpc.api
+        @hvlrpc.api_exp
         class my_api_t(object):
             
-            @hvlrpc.exp_func
+            @hvlrpc.func
             def vprintf(self,
                         fmt : str,
                         ap : hvlrpc.va_list):

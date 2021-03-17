@@ -2,10 +2,13 @@
 from .decorators import *
 from .endpoint import *
 
+import ctypes
 from typing import List, TypeVar, Generic
 from hvlrpc import impl
 from builtins import iter
-from numpy.core._internal import ctypes
+from hvlrpc.api_rgy import ApiRgy
+from hvlrpc.generator_rgy import GeneratorRgy
+from endpoint_mgr import EndpointMgr
 
 _endpoints = []
 
@@ -58,3 +61,12 @@ def register_endpoint(ep : Endpoint):
 def reset():
     impl.reset()
     _endpoints.clear()
+
+def test_init():
+    """Called by the test infrastructure to reset the library state"""
+    ApiRgy.test_init()
+    EndpointMgr.test_init()
+    GeneratorRgy.test_init()
+    
+    
+    
