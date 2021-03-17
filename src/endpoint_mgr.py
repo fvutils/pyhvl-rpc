@@ -12,6 +12,10 @@ class EndpointMgr(object):
     def __init__(self):
         self.endpoints = []
         
+    async def init(self):
+        for e in self.endpoints:
+            await e.init()
+        
     def add_endpoint(self, ep : Endpoint):
         self.endpoints.append(ep)
         

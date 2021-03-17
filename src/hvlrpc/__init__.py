@@ -15,6 +15,9 @@ _endpoints = []
 def endpoints() -> List:
     return _endpoints
 
+async def init():
+    await EndpointMgr.inst().init()
+
 class va_list(object):
     """
     Represents a va_list parameter type, supported
