@@ -27,19 +27,37 @@ class va_list(object):
     def __init__(self):
         pass
     
+    def int8(self) -> ctypes.c_int8:
+        raise NotImplementedError()
+    
     def uint8(self) -> ctypes.c_uint8:
+        raise NotImplementedError()
+    
+    def int16(self) -> ctypes.c_int16:
         raise NotImplementedError()
     
     def uint16(self) -> ctypes.c_uint16:
         raise NotImplementedError()
     
+    def int32(self) -> ctypes.c_int32:
+        raise NotImplementedError()
+    
     def uint32(self) -> ctypes.c_uint32:
         raise NotImplementedError()
 
+    def int64(self) -> ctypes.c_int64:
+        raise NotImplementedError()
+    
     def uint64(self) -> ctypes.c_uint64:
         raise NotImplementedError()
     
+    def ptr(self) -> int:
+        raise NotImplementedError()
+    
     def str(self) -> str:
+        raise NotImplementedError()
+    
+    def va(self) -> 'va_list':
         raise NotImplementedError()
     
 T = TypeVar('T')
