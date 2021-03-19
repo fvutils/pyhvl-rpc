@@ -5,6 +5,7 @@ Created on Jan 31, 2021
 '''
 from typing import List
 from hvlrpc.paramdef import ParamDef
+from hvlrpc.apidef import ApiDef
 
 class MethodDef(object):
     
@@ -16,11 +17,11 @@ class MethodDef(object):
             is_task,
             rtype,
             params : List[ParamDef]):
-        self.parent = parent
+        self.parent : ApiDef = parent
         self.name = name
         self.idx = idx
         self.is_task = is_task
         self.rtype = rtype
-        self.params = params
+        self.params : List[ParamDef] = params
 
         

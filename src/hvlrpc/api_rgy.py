@@ -3,7 +3,6 @@ Created on Mar 13, 2021
 
 @author: mballance
 '''
-from hvlrpc.apidef import ApiDef
 
 class ApiRgy(object):
     
@@ -14,7 +13,7 @@ class ApiRgy(object):
         self.api_byname_m = {}
         self.api_bytype_m = {}
         
-    def add_api(self, api : ApiDef):
+    def add_api(self, api : 'ApiDef'):
         self.api_l.append(api)
         self.api_byname_m[api.name] = api
         self.api_bytype_m[api.cls] = api

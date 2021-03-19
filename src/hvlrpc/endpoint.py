@@ -4,16 +4,49 @@ Created on Jan 31, 2021
 @author: mballance
 '''
 from hvlrpc.packer import Packer
+from hvlrpc.api_rgy import ApiRgy
 
 class Endpoint(object):
     
     def __init__(self): #, name, kind):
         self.api_impl_m = {}
+        self.exp_api_m = {}
         pass
     
     async def init(self):
         """Waits for initialization to complete"""
         pass
+    
+    def register_export_api(self, api_t):
+        """Registers an export API as being recognized by this endpoint.
+        Typically done by the launching environment
+        """
+        apidef = ApiRgy.inst().api_bytype(api_t)
+        if apidef in self.exp_api_m.keys():
+            raise Exception("Api \"" + str(api_t) + "\" is already registered")
+        self.exp_api_m[apidef] = None
+    
+    def set_export_impl(self, api_t, impl=None):
+        """Sets the class implementing an export API. Almost always set by the user"""
+        apidef = ApiRgy.inst().api_bytype(api_t)
+        if apidef not in self.exp_api_m.keys():
+            raise Exception("Api \"" + str(api_t) + "\" is not supported")
+        pass
+    
+    def get_export_api_impl(self, api_t):
+        pass
+    
+    def get_method_impl(self, m : 'MethodDef'):
+        if m.parent not in self.exp_api_m:
+            raise Exception("API " + str(m.parent.cls) + " not supported")
+        
+        impl = self.exp_api_m[m.parent]
+
+        if impl is None:
+            impl = m.parent.cls()
+            self.exp_api_m[m.parent] = impl
+            
+        return getattr(impl, m.name)
 
     def get_api_impl(self, api_t):
         """Obtains a singleton API implementation"""
