@@ -31,6 +31,7 @@ class Endpoint(object):
         apidef = ApiRgy.inst().api_bytype(api_t)
         if apidef not in self.exp_api_m.keys():
             raise Exception("Api \"" + str(api_t) + "\" is not supported")
+        self.exp_api_m[apidef] = impl
         pass
     
     def get_export_api_impl(self, api_t):
