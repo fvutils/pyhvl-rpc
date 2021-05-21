@@ -48,7 +48,6 @@ class Ctor(object):
                     if pname in T.__annotations__.keys():
                         ptype = T.__annotations__[pname]
                         # TODO: validate type
-                        print("pname: " + pname + " " + str(ptype))
                         params.append(ParamDef(pname, ptype))
                     else:
                         raise Exception("Type for parameter " + pname + " unspecified")
@@ -73,9 +72,8 @@ class Ctor(object):
     
     def add_bundle(self, T):
         if hasattr(T, "__annotations__"):
-            print("Has Annotations")
             for key in T.__annotations__.keys():
-                print("key: " + str(key) + " " + str(T.__annotations__[key]))
+                pass
 #             if is_task and "return" in T.__annotations__.keys():
 #                 raise Exception("Cannot specify a return type for a task")
 #             elif not is_task and hasattr(T.__annotations__, "return"):
